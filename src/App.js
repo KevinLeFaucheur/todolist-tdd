@@ -1,14 +1,31 @@
+import { useState } from 'react';
 import './App.css';
 import { styled } from 'styled-components';
 
 const App = () => {
+  const [input, setInput] = useState('');
+  const [todoList, setTodoList] = useState([]);
+
+  const handleClickAdd = () =>{
+    const id = todoList.length + 1;
+    setTodoList(tasks => [
+      ...tasks,
+      {
+        id,
+        task: input,
+        completed: false
+      }
+    ])
+    setInput('');
+  }
+
   return (
     <div className="App">
       <Container data-testid="container">
 
         <h2>TDD To Do List</h2>
-        <Text data-testid="container__input"/>
-        <Button data-testid="container__add">Add</Button>
+        <Text data-testid="container__input" value={input} onInput={e => setInput(e.target.value)}/>
+        <Button data-testid="container__add" onClick={handleClickAdd}>Add</Button>
 
         <Tasks data-testid="container__counts">
           <TaskCount data-testid="container__count"><b>Added</b></TaskCount>
@@ -42,11 +59,10 @@ const Button = styled.button`
   display:inline-block;
   flex: 1;
   border: none;
-  background-color: teal;
+  background-color: #a1a1a1;
   color: white;
-  height: 30px;
-  width: 50px;
-  border-radius: 2px;
+  border-radius: 5px;
+  padding: 10px 20px;
 `
 
 const TaskCount = styled.span`

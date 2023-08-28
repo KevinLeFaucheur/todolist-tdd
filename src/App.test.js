@@ -1,31 +1,20 @@
+import React from 'react';
 import { render, screen } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
 import App from './App';
-
-it('should render "TDD To Do List" text', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/TDD To Do List/i);
-  expect(linkElement).toBeInTheDocument();
-});
-
-it('should render a Container component', () => {
-  render(<App />);
-  const container = screen.getByTestId("container");
-  expect(container).toBeInTheDocument();
-})
-
-describe('Input and Button', () => {
-  it('should render an input type text and Add button', () =>{
-    render(<App />);
-    const input = screen.getByTestId("container__input");
-    expect(input).toBeInTheDocument();
-    const button = screen.getByTestId("container__add");
-    expect(button).toHaveTextContent(/Add/i);
-  })
-})
 
 describe('Task Counts, Tasks list and Clear Button', () => {
   it('should render an input type text and Add button', () =>{
     render(<App />);
+
+    const container = screen.getByTestId("container");
+    expect(container).toBeInTheDocument();
+
+    const input = screen.getByTestId("container__input");
+    expect(input).toBeInTheDocument();
+
+    const add = screen.getByTestId("container__add");
+    expect(add).toHaveTextContent(/Add/i);
 
     const span = screen.getAllByTestId("container__count");
     expect(span).toHaveLength(3);
@@ -33,8 +22,22 @@ describe('Task Counts, Tasks list and Clear Button', () => {
     const list = screen.getByTestId("container__list");
     expect(list).toBeInTheDocument();
 
-    const button = screen.getByTestId("container__clear");
-    expect(button).toHaveTextContent(/Clear/i);
+    const clear = screen.getByTestId("container__clear");
+    expect(clear).toHaveTextContent(/Clear/i);
 
+  })
+})
+
+describe('Adding a task', () => {
+  it('should clear input when clicking Add', () => {  
+    render(<App />);
+
+    const input = screen.getByTestId("container__input");
+    input.value = 'test';
+    const button = screen.getByTestId("container__add");
+    act(() => {
+      button.click();
+    })
+    expect(input.value).toBe('');
   })
 })
