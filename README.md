@@ -1,6 +1,9 @@
+![node.js](https://img.shields.io/badge/node.js-v16.16.0-green?style=for-the-badge&logo=nodedotjs)
+![react](https://img.shields.io/badge/react-18.2.0-18a7d6?style=for-the-badge&logo=react)
+
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Goal of this project is to practice TDD with Jest and React, for developping a TO DO LIST.
 
 ## Available Scripts
 
