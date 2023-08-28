@@ -1,10 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import { styled } from 'styled-components';
 
-function App() {
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const App = () => {
   return (
     <div className="App">
-      TDD To Do List
+      <p>TDD To Do List</p>
+      <Container data-testid="container" />
     </div>
   );
 }
