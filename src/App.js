@@ -1,6 +1,32 @@
 import './App.css';
 import { styled } from 'styled-components';
 
+const App = () => {
+  return (
+    <div className="App">
+      <Container data-testid="container">
+
+        <h2>TDD To Do List</h2>
+        <Text data-testid="container__input"/>
+        <Button data-testid="container__add">Add</Button>
+
+        <Tasks data-testid="container__counts">
+          <TaskCount data-testid="container__count"><b>Added</b></TaskCount>
+          <TaskCount data-testid="container__count"><b>Started</b></TaskCount>
+          <TaskCount data-testid="container__count"><b>Completed</b></TaskCount>
+        </Tasks>
+
+        <ul data-testid="container__list">
+
+        </ul>
+
+        <Button data-testid="container__clear">Clear</Button>
+
+      </Container>
+    </div>
+  );
+}
+
 const Container = styled.div`
   display: flex;
   align-items: center;
@@ -23,17 +49,11 @@ const Button = styled.button`
   border-radius: 2px;
 `
 
-const App = () => {
-  return (
-    <div className="App">
-      <Container data-testid="container">
-        <h2>TDD To Do List</h2>
-        <Text data-testid="container__input"/>
-        <Button data-testid="container__button">Add</Button>
+const TaskCount = styled.span`
+  margin: 10px;
+`
 
-      </Container>
-    </div>
-  );
-}
+const Tasks = styled.div`
+`
 
 export default App;
