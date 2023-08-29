@@ -33,7 +33,15 @@ const App = () => {
           <TaskCount data-testid="container__count"><b>Completed</b></TaskCount>
         </Tasks>
 
-        <ul data-testid="container__list">
+        <ul data-testid="container__list" aria-label='tasks'>
+          {todoList.map((task) => 
+            <TaskItem 
+              id={task.id}
+              key={task.id}
+            >
+            {task.task}
+            </TaskItem>
+          )}
 
         </ul>
 
@@ -70,6 +78,10 @@ const TaskCount = styled.span`
 `
 
 const Tasks = styled.div`
+`
+
+const TaskItem = styled.li` 
+  list-style: none;
 `
 
 export default App;
