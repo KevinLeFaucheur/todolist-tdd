@@ -1,10 +1,9 @@
 import React from 'react';
-import { render, screen, within } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
+import { fireEvent, getByRole, getByText, render, screen, within } from '@testing-library/react';
 import App from './App';
 
-describe('Task Counts, Tasks list and Clear Button', () => {
-  it('should render an input type text and Add button', () =>{
+describe('To Do List', () => {
+  it('should render an Add and Clear buttons, 3 counts, am empty list', () =>{
     render(<App />);
 
     const container = screen.getByTestId("container");
@@ -24,7 +23,6 @@ describe('Task Counts, Tasks list and Clear Button', () => {
 
     const clear = screen.getByTestId("container__clear");
     expect(clear).toHaveTextContent(/Clear/i);
-
   })
 })
 
@@ -35,10 +33,7 @@ describe('Adding a task', () => {
     const input = screen.getByTestId("container__input");
     input.value = 'my first task';
     const button = screen.getByTestId("container__add");
-
-    act(() => {
-      button.click();
-    })
+    fireEvent.click(button);
 
     // This gets the ul by its aria-label
     const list = screen.getByRole("list", {
@@ -46,7 +41,7 @@ describe('Adding a task', () => {
     })
     // This gets all li within the ul
     const { getAllByRole } = within(list);
-    const items = getAllByRole("listitem");
+    const items = getAllByRole('listitem');
 
     expect(input.value).toBe('');
     expect(items.length).toBe(1);
